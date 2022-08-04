@@ -1,65 +1,85 @@
-
-
 // GLOBAL SCOPE
-let currentResult = 0
-let logResult = []
+let currentResult = 0;
+let logResult = [];
+
+
+// Displays calculation description
+function getDescription(temporal, operator) {
+  return `${temporal} ${operator} ${getUserInput()}`;
+}
+function calculate(type) {
+
+  let temporal = currentResult;
+  if (
+    type != "ADD" &&
+    type != "SUBTRACT" &&
+    type != "MULTIPLY" &&
+    type != "DIVIDE"
+  ) {
+  
+    return;
+  }
+ 
+  let operator;
+ 
+  if (type == "ADD") {
+
+    currentResult += getUserInput();
+    // currentResult = 6
+    operator = "+";
+  } else if (type == "SUBTRACT") {
+    currentResult -= getUserInput();
+    operator = "-";
+  } else if (type == "MULTIPLY") {
+    currentResult *= getUserInput();
+    operator = "*";
+  } else if (type == "DIVIDE") {
+    currentResult /= getUserInput();
+    operator = "/";
+  } 
+
+  const calcDescription = getDescription(temporal, operator);
+  writeLog(currentResult, calcDescription);
+  outputResult(currentResult, calcDescription);
+}
 
 
 // Get's user input.
-function getUserInput(){
-   return parseInt(userInput.value)
+function getUserInput() {
+  return parseInt(userInput.value);
 }
 
-// Displays calculation description
-function getDescription(operator){
-   return `${currentResult} ${operator} ${getUserInput()}`
-}
 
-function add(){ 
-  const calcDescription = getDescription('+');
-  currentResult +=  getUserInput();
+function writeLog(currentResult, calcDescription) {
   let resultObj = {
     result: currentResult,
-    description: calcDescription
-  }
-  logResult.push(resultObj)
-  outputResult(currentResult, calcDescription)
+    description: calcDescription,
+  };
+  logResult.push(resultObj);
+  console.log(logResult);
 }
 
-
-addBtn.addEventListener('click', add)
-
-function subtract(){
-    const calcDescription = getDescription('-')
-    currentResult -= getUserInput();
-    outputResult(currentResult, calcDescription)
+function add() {
+  calculate("ADD");
 }
 
-subtractBtn.addEventListener('click',subtract)
-
-
-function multiply(){
-    const calcDescription = getDescription('*')
-    currentResult *= getUserInput();
-    outputResult(currentResult, calcDescription)
+function subtract() {
+  calculate("SUBTRACT");
 }
 
-multiplyBtn.addEventListener('click', multiply)
-
-function divide(){
-    const calcDescription = getDescription('/')
-    currentResult /= getUserInput();
-    outputResult(currentResult, calcDescription)
+function multiply() {
+  calculate("MULTIPLY");
 }
 
-divideBtn.addEventListener('click', divide);
+function divide() {
+  calculate("DATAGIRL");
+}
 
-
-// Numbers
-// Strings
-// Boolean 
-// Arrays 
-// Objects
+subtractBtn.addEventListener("click", subtract);
+subtractBtn.addEventListener("click", subtract);
+multiplyBtn.addEventListener("click", multiply);
+divideBtn.addEventListener("click", divide);
+addBtn.addEventListener("click", add);
 
 
 
